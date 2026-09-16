@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDB WIN - WinGo Demo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        .game-page {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .game-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .period-card,
+        .timer-card {
+            background: var(--card-bg, #171b2d);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .period-label {
+            color: #9299ad;
+            font-size: 13px;
+        }
+
+        .period-number {
+            font-size: 25px;
+            font-weight: 800;
+            margin-top: 6px;
+        }
+
+        .timer {
+            font-size: 34px;
+            font-weight: 900;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .game-box {
+            background: var(--card-bg, #171b2d);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,.08);
+            margin-bottom: 18px;
+        }
+
+        .game-box h2 {
+            margin-top: 0;
+        }
+
+        .demo-label {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(255,193,7,.12);
+            color: #ffc107;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .number-btn {
+            border: 0;
+            height: 58px;
+            border-radius: 14px;
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .number-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .number-btn.selected {
+            outline: 3px solid white;
+            transform: scale(1.04);
+        }
+
+        .num-green {
+            background: linear-gradient(135deg,#00a86b,#00d084);
+        }
+
+        .num-red {
+            background: linear-gradient(135deg,#e53935,#ff5b57);
+        }
+
+        .num-violet {
+            background: linear-gradient(135deg,#7b2cff,#a855f7);
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .color-btn {
+            border: 0;
+            padding: 15px;
+            border-radius: 14px;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .color-btn.selected {
+            outline: 3px solid white;
+        }
+
+        .green-btn {
+            background: #00a86b;
+        }
+
+        .red-btn {
+            background: #e53935;
+        }
+
+        .violet-btn {
+            background: #8b3dff;
+        }
+
+        .selection-info {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,.05);
+            color: #cbd0df;
+        }
+
+        .play-btn {
+            width: 100%;
+            margin-top: 16px;
+            padding: 16px;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(135deg,#ff7a00,#ff3d00);
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .play-btn:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
+
+        .result-box {
+            display: none;
+            text-align: center;
+            padding: 22px;
+            margin-top: 18px;
+            border-radius: 16px;
+            background: rgba(0,200,120,.10);
+            border: 1px solid rgba(0,200,120,.25);
+        }
+
+        .result-number {
+            font-size: 55px;
+            font-weight: 900;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid rgba(255,255,255,.07);
+            text-align: center;
+        }
+
+        .history-table th {
+            color: #8e96aa;
+            font-size: 12px;
+        }
+
+        .badge {
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .badge-green {
+            background: rgba(0,200,120,.15);
+            color: #00d084;
+        }
+
+        .badge-red {
+            background: rgba(255,70,70,.15);
+            color: #ff6565;
+        }
+
+        .badge-violet {
+            background: rgba(145,70,255,.15);
+            color: #b184ff;
+        }
+
+        @media(max-width:600px) {
+            .game-top {
+                grid-template-columns: 1fr;
+            }
+
+            .number-grid {
+                gap: 8px;
+            }
+
+            .number-btn {
+                height: 50px;
+            }
+
+            .game-box {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="logo">BDB <span>WIN</span></div>
+
+    <div class="header-right">
+        <div class="balance">
+            Demo ₹<span id="balance">500</span>
+        </div>
+        <a href="../index.html" class="login-btn">Home</a>
+    </div>
+</header>
+
+<aside class="sidebar" id="sidebar">
+    <div class="user-box">
+        <strong>Guest User</strong>
+        <small>ID: DEMO001</small>
+    </div>
+
+    <a href="../index.html">🏠 Dashboard</a>
+    <a href="game-wingo.html" class="active">🎮 WinGo</a>
+    <a href="game-history.html">📜 Game History</a>
+    <a href="wallet.html">💰 Wallet</a>
+</aside>
+
+<main class="main-content">
+    <div class="game-page">
+
+        <div class="page-title">
+            <h1>WinGo Demo</h1>
+            <span class="demo-label">DEMO MODE</span>
+        </div>
+
+        <div class="game-top">
+
+            <div class="period-card">
+                <div class="period-label">Current Period</div>
+                <div class="period-number" id="period">
+                    202609160001
+                </div>
+            </div>
+
+            <div class="timer-card">
+                <div class="period-label">Next Result In</div>
+                <div class="timer">
+                    <span id="timer">30</span>s
+                </div>
+            </div>
+
+        </div>
+
+        <div class="game-box">
+
+            <h2>Choose Number</h2>
+            <p class="muted">
+                Select any number for this demo round.
+            </p>
+
+            <div class="number-grid">
+
+                <button class="number-btn num-green" data-number="0">0</button>
+                <button class="number-btn num-red" data-number="1">1</button>
+                <button class="number-btn num-green" data-number="2">2</button>
+                <button class="number-btn num-red" data-number="3">3</button>
+                <button class="number-btn num-violet" data-number="4">4</button>
+
+                <button class="number-btn num-red" data-number="5">5</button>
+                <button class="number-btn num-green" data-number="6">6</button>
+                <button class="number-btn num-red" data-number="7">7</button>
+                <button class="number-btn num-green" data-number="8">8</button>
+                <button class="number-btn num-violet" data-number="9">9</button>
+
+            </div>
+
+            <h2 style="margin-top:25px;">Choose Color</h2>
+
+            <div class="color-grid">
+
+                <button class="color-btn green-btn" data-color="Green">
+                    🟢 Green
+                </button>
+
+                <button class="color-btn red-btn" data-color="Red">
+                    🔴 Red
+                </button>
+
+                <button class="color-btn violet-btn" data-color="Violet">
+                    🟣 Violet
+                </button>
+
+            </div>
+
+            <div class="selection-info">
+                Selected Number:
+                <strong id="selectedNumber">None</strong>
+                <br>
+
+                Selected Color:
+                <strong id="selectedColor">None</strong>
+            </div>
+
+            <button class="play-btn" id="playBtn">
+                ▶ Play Demo Round
+            </button>
+
+            <div class="result-box" id="resultBox">
+
+                <div>Round Result</div>
+
+                <div class="result-number" id="resultNumber">
+                    -
+                </div>
+
+                <div id="resultColor">
+                    -
+                </div>
+
+                <div id="resultMessage">
+                    -
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="game-box">
+
+            <h2>Recent Results</h2>
+
+            <table class="history-table">
+
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Number</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+
+                <tbody id="historyBody">
+
+                    <tr>
+                        <td>202609160000</td>
+                        <td>7</td>
+                        <td>
+                            <span class="badge badge-red">Red</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>202609159999</td>
+                        <td>2</td>
+                        <td>
+                            <span class="badge badge-green">Green</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>202609159998</td>
+                        <td>4</td>
+                        <td>
+                            <span class="badge badge-violet">Violet</span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="notice">
+            <strong>Demo Notice</strong>
+            <p>
+                This game is a front-end demonstration only.
+                No real-money betting, deposits, withdrawals or
+                financial transactions are enabled.
+            </p>
+        </div>
+
+    </div>
+</main>
+
+<script>
+
+let balance = 500;
+
+let selectedNumber = null;
+let selectedColor = null;
+
+let period = 202609160001;
+let timeLeft = 30;
+
+const balanceEl = document.getElementById("balance");
+const timerEl = document.getElementById("timer");
+const periodEl = document.getElementById("period");
+
+
+// NUMBER SELECTION
+document.querySelectorAll(".number-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".number-btn")
+            .forEach(btn => btn.classList.remove("selected"));
+
+        button.classList.add("selected");
+
+        selectedNumber = Number(button.dataset.number);
+
+        document.getElementById("selectedNumber").textContent =
+            selectedNumber;
+
+    });
+
+});
+
+
+// COLOR SELECTION
+document.querySelectorAll(".color-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".color-btn")
+            .forEach(btn => btn.classList.remove("selected"));
+
+        button.classList.add("selected");
+
+        selectedColor = button.dataset.color;
+
+        document.getElementById("selectedColor").textContent =
+            selectedColor;
+
+    });
+
+});
+
+
+// DEMO PLAY
+document.getElementById("playBtn").addEventListener("click", playRound);
+
+
+function playRound() {
+
+    if (selectedNumber === null && selectedColor === null) {
+
+        alert("Please select a number or color first.");
+
+        return;
+    }
+
+    const button = document.getElementById("playBtn");
+
+    button.disabled = true;
+    button.textContent = "⏳ Waiting for Demo Result...";
+
+
+    // Fair random demo result
+    const resultNumber =
+        Math.floor(Math.random() * 10);
+
+    const resultColor =
+        getColor(resultNumber);
+
+
+    setTimeout(() => {
+
+        document.getElementById("resultBox").style.display = "block";
+
+        document.getElementById("resultNumber")
+            .textContent = resultNumber;
+
+        document.getElementById("resultColor")
+            .textContent = resultColor;
+
+
+        let win = false;
+
+
+        if (
+            selectedNumber !== null &&
+            selectedNumber === resultNumber
+        ) {
+            win = true;
+        }
+
+
+        if (
+            selectedColor !== null &&
+            selectedColor === resultColor
+        ) {
+            win = true;
+        }
+
+
+        if (win) {
+
+            document.getElementById("resultMessage")
+                .textContent = "🎉 Demo Result: You matched!";
+
+        } else {
+
+            document.getElementById("resultMessage")
+                .textContent = "Demo Result: No match this round.";
+
+        }
+
+
+        addHistory(
+            period,
+            resultNumber,
+            resultColor
+        );
+
+
+        period++;
+
+        periodEl.textContent = period;
+
+        resetSelection();
+
+        button.disabled = false;
+        button.textContent = "▶ Play Demo Round";
+
+        timeLeft = 30;
+
+    }, 1200);
+
+}
+
+
+// COLOR LOGIC
+function getColor(number) {
+
+    if (
+        number === 0 ||
+        number === 2 ||
+        number === 6 ||
+        number === 8
+    ) {
+        return "Green";
+    }
+
+    if (
+        number === 1 ||
+        number === 3 ||
+        number === 5 ||
+        number === 7
+    ) {
+        return "Red";
+    }
+
+    return "Violet";
+}
+
+
+// HISTORY
+function addHistory(period, number, color) {
+
+    const tbody =
+        document.getElementById("historyBody");
+
+    const row =
+        document.createElement("tr");
+
+    let badgeClass = "badge-green";
+
+    if (color === "Red") {
+        badgeClass = "badge-red";
+    }
+
+    if (color === "Violet") {
+        badgeClass = "badge-violet";
+    }
+
+    row.innerHTML = `
+        <td>${period}</td>
+        <td>${number}</td>
+        <td>
+            <span class="badge ${badgeClass}">
+                ${color}
+            </span>
+        </td>
+    `;
+
+    tbody.prepend(row);
+
+}
+
+
+// RESET
+function resetSelection() {
+
+    selectedNumber = null;
+    selectedColor = null;
+
+    document.getElementById("selectedNumber")
+        .textContent = "None";
+
+    document.getElementById("selectedColor")
+        .textContent = "None";
+
+    document.querySelectorAll(".number-btn")
+        .forEach(btn => btn.classList.remove("selected"));
+
+    document.querySelectorAll(".color-btn")
+        .forEach(btn => btn.classList.remove("selected"));
+
+}
+
+
+// TIMER
+setInterval(() => {
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+        timeLeft = 30;
+    }
+
+    timerEl.textContent = timeLeft;
+
+}, 1000);
+
+
+// SIDEBAR
+function toggleSidebar() {
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    sidebar.classList.toggle("show");
+
+}
+
+</script>
+
+</body>
+</html>
