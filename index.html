@@ -12,14 +12,17 @@
 
 <body>
 
-<!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 <header class="header">
 
     <div class="header-left">
 
-        <button class="menu-btn"
-                onclick="toggleSidebar()"
-                aria-label="Open menu">
+        <button
+            class="menu-btn"
+            onclick="toggleSidebar()"
+            aria-label="Open menu">
             ☰
         </button>
 
@@ -29,12 +32,19 @@
 
     </div>
 
+
     <div class="header-right">
 
         <div class="balance">
+
             <small>Demo Balance</small>
-            <strong>₹<span id="balance">500</span></strong>
+
+            <strong>
+                ₹<span id="balance">500</span>
+            </strong>
+
         </div>
+
 
         <a href="login.html" class="login-btn">
             Login
@@ -45,7 +55,9 @@
 </header>
 
 
-<!-- SIDEBAR -->
+<!-- =========================
+     SIDEBAR
+========================= -->
 <aside class="sidebar" id="sidebar">
 
     <div class="profile-box">
@@ -54,14 +66,27 @@
             U
         </div>
 
+
         <div class="profile-info">
-            <h3>Guest User</h3>
-            <p>ID: DEMO001</p>
+
+            <h3>
+                Guest User
+            </h3>
+
+            <p>
+                ID: DEMO001
+            </p>
+
         </div>
 
-        <button class="close-sidebar"
-                onclick="toggleSidebar()">
+
+        <button
+            class="close-sidebar"
+            onclick="toggleSidebar()"
+            aria-label="Close menu">
+
             ×
+
         </button>
 
     </div>
@@ -69,44 +94,69 @@
 
     <nav class="side-nav">
 
-        <a href="index.html" class="active">
+        <a
+            href="index.html"
+            class="active">
+
             <span>🏠</span>
             <span>Home</span>
+
         </a>
+
 
         <a href="pages/game-wingo.html">
+
             <span>🎮</span>
             <span>WinGo</span>
+
         </a>
+
 
         <a href="pages/wallet.html">
+
             <span>💰</span>
             <span>Wallet</span>
+
         </a>
+
 
         <a href="pages/transaction.html">
+
             <span>📋</span>
             <span>Transactions</span>
+
         </a>
+
 
         <a href="pages/referral.html">
+
             <span>👥</span>
             <span>Referral</span>
+
         </a>
+
 
         <a href="pages/profile.html">
+
             <span>👤</span>
             <span>Profile</span>
+
         </a>
+
 
         <a href="pages/notifications.html">
+
             <span>🔔</span>
             <span>Notifications</span>
+
         </a>
 
+
         <a href="pages/support.html">
+
             <span>💬</span>
             <span>Support</span>
+
         </a>
 
     </nav>
@@ -114,46 +164,66 @@
 </aside>
 
 
-<!-- MOBILE OVERLAY -->
-<div class="sidebar-overlay"
-     id="sidebarOverlay"
-     onclick="toggleSidebar()">
+<!-- =========================
+     MOBILE OVERLAY
+========================= -->
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="toggleSidebar()">
 </div>
 
 
-<!-- MAIN -->
+<!-- =========================
+     MAIN CONTENT
+========================= -->
 <main class="main-content">
 
 
-    <!-- HERO -->
+    <!-- =====================
+         HERO
+    ====================== -->
     <section class="hero">
 
         <div class="hero-content">
+
 
             <span class="badge">
                 🎮 BDB WIN DEMO
             </span>
 
+
             <h1>
                 Welcome to BDB WIN
             </h1>
+
 
             <p>
                 Explore the WinGo demo experience,
                 game history and account features.
             </p>
 
+
             <div class="hero-buttons">
 
-                <a href="pages/game-wingo.html"
-                   class="primary-btn">
-                    Play WinGo
+
+                <a
+                    href="pages/game-wingo.html"
+                    class="primary-btn">
+
+                    ▶ Play WinGo
+
                 </a>
 
-                <a href="pages/game-history.html"
-                   class="secondary-btn">
-                    Game History
+
+                <a
+                    href="pages/game-history.html"
+                    class="secondary-btn">
+
+                    📋 Game History
+
                 </a>
+
 
             </div>
 
@@ -162,55 +232,82 @@
     </section>
 
 
-    <!-- WALLET SUMMARY -->
+
+    <!-- =====================
+         WALLET SUMMARY
+    ====================== -->
     <section class="wallet-cards">
 
+
+        <!-- BALANCE -->
         <div class="wallet-card">
 
             <div class="card-icon">
                 💰
             </div>
 
+
             <div>
-                <p>Available Balance</p>
+
+                <p>
+                    Available Balance
+                </p>
+
 
                 <h2>
                     ₹<span id="availableBalance">500</span>
                 </h2>
+
             </div>
 
         </div>
 
 
+
+        <!-- REFERRAL -->
         <div class="wallet-card">
 
             <div class="card-icon">
                 🎁
             </div>
 
+
             <div>
-                <p>Referral Bonus</p>
+
+                <p>
+                    Referral Bonus
+                </p>
+
 
                 <h2>
                     ₹0
                 </h2>
+
             </div>
 
         </div>
 
 
+
+        <!-- WINS -->
         <div class="wallet-card">
 
             <div class="card-icon">
                 🏆
             </div>
 
-            <div>
-                <p>Total Wins</p>
 
-                <h2>
+            <div>
+
+                <p>
+                    Total Wins
+                </p>
+
+
+                <h2 id="totalWins">
                     0
                 </h2>
+
             </div>
 
         </div>
@@ -218,345 +315,700 @@
     </section>
 
 
-    <!-- GAMES -->
+
+    <!-- =====================
+         GAMES
+    ====================== -->
     <section class="section">
+
 
         <div class="section-header">
 
             <div>
-                <h2>Games</h2>
+
+                <h2>
+                    Games
+                </h2>
+
 
                 <p>
                     Select a demo game
                 </p>
+
             </div>
 
         </div>
 
 
+
         <div class="game-grid">
 
 
-            <!-- WINGO -->
+            <!-- =================
+                 WINGO
+            ================== -->
             <article class="game-card">
 
+
                 <div class="game-banner wingo-banner">
+
 
                     <div class="game-symbol">
                         🎯
                     </div>
 
+
                     <span>
                         DEMO
                     </span>
 
+
                 </div>
+
 
 
                 <div class="game-info">
 
+
                     <h3>
                         WinGo
                     </h3>
+
 
                     <p>
                         Number prediction demo game
                     </p>
 
 
+
                     <div class="game-footer">
+
 
                         <span>
                             ⏱ 60 Seconds
                         </span>
 
-                        <a href="pages/game-wingo.html"
-                           class="play-btn">
+
+                        <a
+                            href="pages/game-wingo.html"
+                            class="play-btn">
+
                             Play
+
                         </a>
+
 
                     </div>
 
+
                 </div>
+
 
             </article>
 
 
-            <!-- COLOR GAME -->
+
+            <!-- =================
+                 COLOR GAME
+            ================== -->
             <article class="game-card coming-soon">
 
+
                 <div class="game-banner color-banner">
+
 
                     <div class="game-symbol">
                         🎲
                     </div>
 
+
                     <span>
                         COMING SOON
                     </span>
 
+
                 </div>
+
 
 
                 <div class="game-info">
 
+
                     <h3>
                         Color Prediction
                     </h3>
+
 
                     <p>
                         New demo game will be available soon.
                     </p>
 
 
+
                     <div class="game-footer">
+
 
                         <span>
                             🔒 Locked
                         </span>
 
-                        <button disabled>
+
+                        <button
+                            class="play-btn"
+                            disabled>
+
                             Coming Soon
+
                         </button>
+
 
                     </div>
 
+
                 </div>
+
 
             </article>
 
-        </div>
-
-    </section>
 
 
-    <!-- QUICK ACTIONS -->
-    <section class="section">
-
-        <div class="section-header">
-            <h2>Quick Actions</h2>
-        </div>
+            <!-- =================
+                 NUMBER GAME
+            ================== -->
+            <article class="game-card coming-soon">
 
 
-        <div class="quick-grid">
-
-            <a href="pages/wallet.html"
-               class="quick-card">
-
-                <span>💰</span>
-
-                <strong>
-                    Wallet
-                </strong>
-
-                <small>
-                    View balance
-                </small>
-
-            </a>
+                <div class="game-banner number-banner">
 
 
-            <a href="pages/transaction.html"
-               class="quick-card">
-
-                <span>📋</span>
-
-                <strong>
-                    Transactions
-                </strong>
-
-                <small>
-                    View history
-                </small>
-
-            </a>
+                    <div class="game-symbol">
+                        🔢
+                    </div>
 
 
-            <a href="pages/referral.html"
-               class="quick-card">
-
-                <span>👥</span>
-
-                <strong>
-                    Referral
-                </strong>
-
-                <small>
-                    Invite friends
-                </small>
-
-            </a>
+                    <span>
+                        COMING SOON
+                    </span>
 
 
-            <a href="pages/support.html"
-               class="quick-card">
+                </div>
 
-                <span>💬</span>
 
-                <strong>
-                    Support
-                </strong>
 
-                <small>
-                    Get help
-                </small>
+                <div class="game-info">
 
-            </a>
+
+                    <h3>
+                        Number Game
+                    </h3>
+
+
+                    <p>
+                        More number-based demo games.
+                    </p>
+
+
+
+                    <div class="game-footer">
+
+
+                        <span>
+                            🔒 Locked
+                        </span>
+
+
+                        <button
+                            class="play-btn"
+                            disabled>
+
+                            Coming Soon
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
 
         </div>
 
     </section>
 
 
-    <!-- RESULTS -->
+
+    <!-- =====================
+         QUICK ACTIONS
+    ====================== -->
     <section class="section">
+
 
         <div class="section-header">
 
             <div>
 
                 <h2>
-                    Recent Results
+                    Quick Actions
                 </h2>
 
+
                 <p>
-                    Demo results
+                    Explore demo account features
                 </p>
 
             </div>
 
-            <a href="pages/game-history.html"
-               class="view-all">
-                View All →
-            </a>
-
         </div>
 
 
-        <div class="results-box">
 
-            <div class="result-row">
-
-                <span>#10005</span>
-
-                <strong>7</strong>
-
-                <span class="result green">
-                    Green
-                </span>
-
-            </div>
+        <div class="quick-grid">
 
 
-            <div class="result-row">
+            <a
+                href="pages/wallet.html"
+                class="quick-card">
 
-                <span>#10004</span>
+                <div class="quick-icon">
+                    💰
+                </div>
 
-                <strong>3</strong>
+                <div>
 
-                <span class="result red">
-                    Red
-                </span>
+                    <h3>
+                        Wallet
+                    </h3>
 
-            </div>
+                    <p>
+                        View demo balance
+                    </p>
 
+                </div>
 
-            <div class="result-row">
-
-                <span>#10003</span>
-
-                <strong>8</strong>
-
-                <span class="result red">
-                    Red
-                </span>
-
-            </div>
+            </a>
 
 
-            <div class="result-row">
 
-                <span>#10002</span>
+            <a
+                href="pages/game-history.html"
+                class="quick-card">
 
-                <strong>2</strong>
+                <div class="quick-icon">
+                    📊
+                </div>
 
-                <span class="result green">
-                    Green
-                </span>
+                <div>
 
-            </div>
+                    <h3>
+                        Game History
+                    </h3>
+
+                    <p>
+                        View previous results
+                    </p>
+
+                </div>
+
+            </a>
 
 
-            <div class="result-row">
 
-                <span>#10001</span>
+            <a
+                href="pages/referral.html"
+                class="quick-card">
 
-                <strong>5</strong>
+                <div class="quick-icon">
+                    👥
+                </div>
 
-                <span class="result violet">
-                    Violet
-                </span>
+                <div>
 
-            </div>
+                    <h3>
+                        Referral
+                    </h3>
+
+                    <p>
+                        Demo referral section
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <a
+                href="pages/support.html"
+                class="quick-card">
+
+                <div class="quick-icon">
+                    💬
+                </div>
+
+                <div>
+
+                    <h3>
+                        Support
+                    </h3>
+
+                    <p>
+                        Contact support
+                    </p>
+
+                </div>
+
+            </a>
+
 
         </div>
 
     </section>
 
 
-    <!-- DEMO NOTICE -->
+
+    <!-- =====================
+         RECENT RESULTS
+    ====================== -->
+    <section class="section">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>
+                    Recent Demo Results
+                </h2>
+
+
+                <p>
+                    Latest WinGo demo results
+                </p>
+
+            </div>
+
+
+            <a
+                href="pages/game-history.html"
+                class="view-all">
+
+                View All →
+
+            </a>
+
+        </div>
+
+
+
+        <div class="results-card">
+
+
+            <div class="result-row">
+
+                <div>
+
+                    <small>
+                        Period
+                    </small>
+
+                    <strong>
+                        #10005
+                    </strong>
+
+                </div>
+
+
+                <div class="result-number green">
+                    8
+                </div>
+
+
+                <div class="result-color">
+                    🟢 Green
+                </div>
+
+            </div>
+
+
+
+            <div class="result-row">
+
+                <div>
+
+                    <small>
+                        Period
+                    </small>
+
+                    <strong>
+                        #10004
+                    </strong>
+
+                </div>
+
+
+                <div class="result-number red">
+                    3
+                </div>
+
+
+                <div class="result-color">
+                    🔴 Red
+                </div>
+
+            </div>
+
+
+
+            <div class="result-row">
+
+                <div>
+
+                    <small>
+                        Period
+                    </small>
+
+                    <strong>
+                        #10003
+                    </strong>
+
+                </div>
+
+
+                <div class="result-number violet">
+                    4
+                </div>
+
+
+                <div class="result-color">
+                    🟣 Violet
+                </div>
+
+            </div>
+
+
+
+            <div class="result-row">
+
+                <div>
+
+                    <small>
+                        Period
+                    </small>
+
+                    <strong>
+                        #10002
+                    </strong>
+
+                </div>
+
+
+                <div class="result-number red">
+                    7
+                </div>
+
+
+                <div class="result-color">
+                    🔴 Red
+                </div>
+
+            </div>
+
+
+
+            <div class="result-row">
+
+                <div>
+
+                    <small>
+                        Period
+                    </small>
+
+                    <strong>
+                        #10001
+                    </strong>
+
+                </div>
+
+
+                <div class="result-number green">
+                    2
+                </div>
+
+
+                <div class="result-color">
+                    🟢 Green
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================
+         DEMO NOTICE
+    ====================== -->
     <section class="notice">
 
+
         <div class="notice-icon">
-            ⚠️
+            ℹ️
         </div>
+
 
         <div>
 
-            <strong>
+            <h3>
                 Demo Mode
-            </strong>
+            </h3>
+
 
             <p>
-                This frontend is currently a demonstration.
-                No real-money deposit, withdrawal or betting
-                is enabled.
+                This website is currently running in demo mode.
+                No real-money deposits, withdrawals or betting
+                transactions are enabled.
             </p>
 
         </div>
 
     </section>
 
+
 </main>
 
 
-<!-- FOOTER -->
+
+<!-- =========================
+     FOOTER
+========================= -->
 <footer class="footer">
 
-    <div>
-        © 2026 BDB WIN
+
+    <div class="footer-content">
+
+
+        <div>
+
+            <strong>
+                BDB WIN
+            </strong>
+
+            <p>
+                Demo gaming interface
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="pages/terms.html">
+                Terms
+            </a>
+
+            <a href="pages/privacy.html">
+                Privacy
+            </a>
+
+            <a href="pages/support.html">
+                Support
+            </a>
+
+        </div>
+
+
     </div>
 
-    <div class="footer-links">
 
-        <a href="pages/terms.html">
-            Terms
-        </a>
+    <div class="footer-bottom">
 
-        <a href="pages/privacy.html">
-            Privacy
-        </a>
-
-        <a href="pages/support.html">
-            Support
-        </a>
+        © 2026 BDB WIN Demo.
+        For demonstration purposes only.
 
     </div>
+
 
 </footer>
 
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 <script>
+
+
+/* =========================
+   DEMO BALANCE
+========================= */
+
+let demoBalance = 500;
+
+let totalWins = 0;
+
+
+/* =========================
+   UPDATE BALANCE
+========================= */
+
+function updateBalance() {
+
+    const balanceElement =
+        document.getElementById("balance");
+
+    const availableBalanceElement =
+        document.getElementById("availableBalance");
+
+
+    if (balanceElement) {
+
+        balanceElement.textContent =
+            demoBalance.toFixed(0);
+
+    }
+
+
+    if (availableBalanceElement) {
+
+        availableBalanceElement.textContent =
+            demoBalance.toFixed(0);
+
+    }
+
+}
+
+
+/* =========================
+   UPDATE TOTAL WINS
+========================= */
+
+function updateWins() {
+
+    const winsElement =
+        document.getElementById("totalWins");
+
+
+    if (winsElement) {
+
+        winsElement.textContent =
+            totalWins;
+
+    }
+
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
 
 function toggleSidebar() {
 
@@ -566,51 +1018,96 @@ function toggleSidebar() {
     const overlay =
         document.getElementById("sidebarOverlay");
 
+
+    if (!sidebar) {
+        return;
+    }
+
+
     sidebar.classList.toggle("show");
 
-    overlay.classList.toggle("show");
+
+    if (overlay) {
+
+        overlay.classList.toggle("show");
+
+    }
+
 }
 
 
-/* Demo balance */
-let demoBalance = 500;
+/* =========================
+   CLOSE SIDEBAR
+   WHEN LINK IS CLICKED
+========================= */
 
-function updateBalance() {
-
-    const balance =
-        document.getElementById("balance");
-
-    const availableBalance =
-        document.getElementById("availableBalance");
-
-    balance.textContent = demoBalance;
-
-    availableBalance.textContent =
-        demoBalance;
-}
-
-updateBalance();
-
-
-/* Close sidebar after clicking link on mobile */
 document.querySelectorAll(".side-nav a")
-.forEach(function(link) {
+    .forEach(function(link) {
 
-    link.addEventListener("click", function() {
+        link.addEventListener("click", function() {
 
-        document
-        .getElementById("sidebar")
-        .classList.remove("show");
+            const sidebar =
+                document.getElementById("sidebar");
 
-        document
-        .getElementById("sidebarOverlay")
-        .classList.remove("show");
+            const overlay =
+                document.getElementById("sidebarOverlay");
+
+
+            if (window.innerWidth <= 900) {
+
+                if (sidebar) {
+                    sidebar.classList.remove("show");
+                }
+
+                if (overlay) {
+                    overlay.classList.remove("show");
+                }
+
+            }
+
+        });
 
     });
 
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        const overlay =
+            document.getElementById("sidebarOverlay");
+
+
+        if (sidebar) {
+            sidebar.classList.remove("show");
+        }
+
+
+        if (overlay) {
+            overlay.classList.remove("show");
+        }
+
+    }
+
 });
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+updateBalance();
+updateWins();
+
 
 </script>
 
 </body>
-  </html>
+</html>
